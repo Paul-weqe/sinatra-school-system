@@ -1,9 +1,16 @@
 # <%= ENV['DATABASE_URL'] %>
 
-encoding: 'utf8',
-adapter: 'postgresql',
-host: 'localhost',
-username: 'postgres',
-password: 'Omwene11@',
+# encoding: 'utf8'
+# adapter: 'postgresql'
+# host: 'localhost'
+# username: 'postgres'
+# password: 'Omwene11@'
+# database: 'school_sinatra'
+
+encoding: 'utf8'
+adapter: 'postgresql'
+host: 'localhost'
+username: 'postgres'
+password: ${POSTGRES_PASSWORD}
 database: 'school_sinatra'
 
