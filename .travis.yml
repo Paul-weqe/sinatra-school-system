@@ -1,0 +1,20 @@
+language: ruby
+dist: xenial
+rvm:
+  - 2.5
+  - 2.6
+
+services:
+  - postgresql
+
+before_install:
+  - gem install bundler
+ 
+env:
+  - "TEST_POSTGRES_USER=postgres"
+  - "TEST_POSTGRES_PASSWORD="
+  - "TEST_POSTGRES_HOST=localhost"
+  - "TEST_POSTGRES_DATABASE=test_school_sinatra"
+
+script:
+  rspec
