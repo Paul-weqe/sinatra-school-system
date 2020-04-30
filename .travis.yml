@@ -11,10 +11,6 @@ before_install:
   - gem install bundler
   - sudo apt-get update
   - sudo apt-get install ruby-rspec-core
-  - git clone https://github.com/travis-ci/travis-support.git
-  - cd travis-support
-  - gem build travis-support.Gemfile # Or whatever the filename is, I'm doing this from memory
-  - gem install travis-support
   
 script:
   rspec
