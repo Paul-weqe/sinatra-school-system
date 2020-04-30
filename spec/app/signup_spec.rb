@@ -5,7 +5,7 @@ require 'dotenv'
 require_relative 'database_settings'
 
 
-describe "base get route json" do 
+describe "test for sign up" do 
     
 
     before(:all) do 
@@ -25,7 +25,7 @@ describe "base get route json" do
 
         body = { "email" => "paul@paul.com", "username" => "paul", "password" => "paulPassword" }
         h = { 'Content-Type' => 'application/json' }
-        post "/users", body.to_json, h
+        post "/user/sign_up", body.to_json, h
         body.delete("password")
 
         # confirm whether the status code and the body are what we expect
@@ -38,7 +38,7 @@ describe "base get route json" do
         body = { "email" => "paul@paul.com", "username" => "paul1", "password" => "paulPassword" }
         h = { 'Content-Type' => 'application/json' }
         expected_response = {"error" => "user with email #{body["email"]} already exists"}
-        post "/users", body.to_json, h
+        post "/user/sign_up", body.to_json, h
 
         last_response.status.should == 409
         JSON.parse(last_response.body).should == expected_response
@@ -48,14 +48,14 @@ describe "base get route json" do
         body = { "email" => "paul1@paul.com", "username" => "paul", "password" => "paulPassword" }
         h = { 'Content-Type' => 'application/json' }
         expected_response = {"error" => "user with username #{body["username"]} already exists"}
-        post "/users", body.to_json, h
+        post "/user/sign_up", body.to_json, h
 
         last_response.status.should == 409
         JSON.parse(last_response.body).should == expected_response
     end
 
     it "Gets all users in the database. Expect 200 code and 1 user" do
-        get "/users"
+        get "/user/sign_up"
         
         last_response.status.should == 200
         JSON.parse(last_response.body).length.should == 1

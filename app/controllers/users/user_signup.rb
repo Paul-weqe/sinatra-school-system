@@ -9,11 +9,11 @@ class MyApp < Sinatra::Base
     content_type 'application/json'
   end
 
-  get '/users' do
+  get '/user/sign_up' do
     User.all.to_json
   end
   
-  post '/users' do 
+  post '/user/sign_up' do 
     json_data = JSON.parse request.body.read
     
     # Check if user details(username and email) already exist in the system
