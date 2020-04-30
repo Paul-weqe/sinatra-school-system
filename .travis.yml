@@ -13,4 +13,4 @@ before_install:
   - sudo apt-get install ruby-rspec-core
   
 script:
-  rspec
+  - bundle exec rspec
