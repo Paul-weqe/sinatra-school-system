@@ -1,0 +1,33 @@
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+    box-shadow: none !important;
+}
+
+
+input[type=text], input[type=password] {
+    border-radius: 0%;
+    border: none;
+    border-bottom: 1px solid black;
+    padding: 1px 0 1px 0;
+}
+
+input[type=submit] {
+    background-color: black;
+    color: white;
+    padding: 5px 25px 5px 25px;
+    border: none;
+    margin-top: 10px;
+}

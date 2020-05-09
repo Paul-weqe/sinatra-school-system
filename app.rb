@@ -4,7 +4,7 @@ Dotenv.load
 
 project_root = File.dirname(File.absolute_path(__FILE__))
 Dir.glob(project_root + "/app/models/*.rb").each{|f| require f}
-Dir.glob(project_root + "/app/controllers/*.rb").each{|f| require f}
+Dir.glob(project_root + "/app/controllers/*/*.rb").each{|f| require f}
 
 database_details = { 
     encoding: 'utf8',

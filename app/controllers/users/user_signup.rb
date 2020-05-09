@@ -1,41 +1,28 @@
 require 'sinatra/base'
 require 'json'
+require 'haml'
 
 
 class MyApp < Sinatra::Base
-  include ValidateUserCreation
-  
-  before do 
-    content_type 'application/json'
+  root_path = File.expand_path('.', Dir.pwd) 
+  enable :sessions
+
+  set :views, root_path + "/views"
+  set :public_folder, root_path + "/static"
+
+  get '/sign-up' do
+    @error_message = session[:error_message]
+    erb :sign_up
   end
 
-  get '/user/sign_up' do
-    User.all.to_json
-  end
-  
-  post '/user/sign_up' do 
-    json_data = JSON.parse request.body.read
+  post '/sign-up' do 
     
-    # Check if user details(username and email) already exist in the system
-    if (User.find_by email: json_data["email"]) != nil
-      status 409
-      return {"error" => "user with email #{json_data["email"]} already exists"}.to_json
-
-    elsif (User.find_by username: json_data["username"]) != nil
-      status 409
-      return {"error" => "user with username #{json_data["username"]} already exists"}.to_json
-
+    params.each do |k, v|
+      if v.strip == ""
+        session[:error_message] = "Field #{k} cannot be left blank"
+        redirect "/sign-up"
+      end
     end
-
-    user = User.new
-    user.email = json_data["email"]
-    user.username = json_data["username"]
-    user.password = json_data["password"]
-    user.save == false
-    
-    status 201
-    {:username => user.username, :email => user.email}.to_json
-
   end
 
 end

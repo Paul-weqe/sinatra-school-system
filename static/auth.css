@@ -1,0 +1,39 @@
+#auth-page-container {
+    height: 100%;
+    
+}
+
+
+#auth-page-container .row {
+    height: 100%;
+    background-color: #e8e1e1;
+}
+
+
+
+
+.auth-form-semi-section {
+    min-height: 500px;
+    margin-bottom: auto;
+    margin-top: auto;
+    vertical-align: middle;
+}
+
+.content-side {
+    background-color: blue;
+    background: url(https://images.pexels.com/photos/1550337/pexels-photo-1550337.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border: 1px solid black;
+}
+
+.form-side {
+    border: 1px solid black;
+    background-color: white;
+}
+
+.form-side .form-group {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: white;
+}
