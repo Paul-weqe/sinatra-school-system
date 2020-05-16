@@ -1,11 +1,9 @@
 require 'sinatra/base'
-require 'json'
-require 'haml'
-
 
 class MyApp < Sinatra::Base
   root_path = File.expand_path('.', Dir.pwd) 
   enable :sessions
+  include UserAuthentication
 
   set :views, root_path + "/views"
   set :public_folder, root_path + "/static"
@@ -16,13 +14,13 @@ class MyApp < Sinatra::Base
   end
 
   post '/sign-up' do 
-    
-    params.each do |k, v|
-      if v.strip == ""
-        session[:error_message] = "Field #{k} cannot be left blank"
-        redirect "/sign-up"
-      end
+    create_user_result = create_user params
+    if create_user_result.class == String
+      session[:error] = create_user_result
+      redirect "/sign-up"
     end
+    session[:notice] = "Successfully logged into the system"
+    redirect "/user-login"
   end
 
 end

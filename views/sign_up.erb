@@ -14,11 +14,20 @@
 <body>
 
   <div class="container-fluid" id="auth-page-container">
-    
     <div class="row justify-content-center" >
-      <% if @error_message.present? %>
-        <p><%= @error_message %></p>
-      <% end %>
+      
+      <div class="col-12">
+        <% if @error_message.present? %>  
+        <div class="alert alert-danger" role="alert">
+            <%= @error_message %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <% session[:error_message] = nil %>
+        </div>
+        <% end %>
+      </div>
+
       <div class="col-4 auth-form-semi-section content-side">
       </div>
 

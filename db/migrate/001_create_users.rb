@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration[4.2]
       t.string :first_name
       t.string :last_name 
       t.string :password
+      t.boolean :is_admin, default: false
     end
   end
 end
