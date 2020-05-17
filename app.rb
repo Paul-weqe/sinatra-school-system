@@ -1,23 +1,12 @@
-require 'active_record'
+require 'data_mapper'
 require 'dotenv'
 Dotenv.load
 
-project_root = File.dirname(File.absolute_path(__FILE__))
-Dir.glob(project_root + "/app/models/*.rb").each{|f| require f}
-Dir.glob(project_root + "/app/helpers/*.rb").each{|f| require f}
-Dir.glob(project_root + "/app/controllers/*/*.rb").each{|f| require f}
-
-database_details = { 
-    encoding: 'utf8',
-    adapter: 'postgresql',
-    host: ENV['POSTGRES_HOST'],
-    username: ENV['POSTGRES_USER'],
-    password: ENV['POSTGRES_PASSWORD'],
-    database: ENV['POSTGRES_DATABASE']
-}
-
-ActiveRecord::Base.establish_connection(database_details)
+Dir.glob("#{Dir.pwd}/lib/*/controller.rb").each{|f| require f}
+Dir.glob("#{Dir.pwd}/lib/*/models.rb").each{|f| require f}
+DataMapper.setup :default, "postgres://#{ENV['POSTGRES_USER']}:#{ENV['POSTGRES_PASSWORD']}@#{ENV['POSTGRES_HOST']}/#{ENV['POSTGRES_DATABASE']}"
 
 if __FILE__ ==  $0
-    MyApp.run!
+    MainApp.run!
 end
+
