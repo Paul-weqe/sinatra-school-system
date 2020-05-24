@@ -4,9 +4,6 @@ dist: xenial
 rvm:
   - 2.7
 
-services:
-  - postgresql
-
 before_install:
   - gem install bundler
   - sudo apt-get update
