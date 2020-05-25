@@ -44,3 +44,42 @@ describe "test fields when creating intake" do
   end
 
 end
+
+describe "check create intake" do
+
+  after (:all) do 
+    Intake.destroy!
+  end
+
+  it "create without all the valid fields" do
+    # notice month name has been left out
+    fields = {
+      :name => "January Intake", :month_number => 1
+    }
+    expect(create_intake fields).to eq "None of the fiels 'name', 'month_name' and 'month_number' cannot be left blank"
+  end
+
+  it "create while keeping wrong data type for input field month_name" do 
+    # notice the :month_name has been set to Integer instead of String
+    fields = {
+      :name => "January Intake", :month_number => 1, :month_name => 1
+    }
+    expect(create_intake fields).to eq "Field 'month_name' must be a valid month from 'January' to 'December'"
+  end
+
+  it "create while keeping wrong data type for input field month_number" do 
+    # notice the :month_number has been set to String instead of Integer
+    fields = {
+      :name => "January Intake", :month_number => "1", :month_name => "January"
+    }
+    expect(create_intake fields).to eq "Field 'month_number' must be a number between 1 and 12"
+  end
+
+  it "create an intake with all valid fields" do
+    fields = {
+      :name => "January Intake", :month_number => 1, :month_name => "January"
+    }
+    expect(create_intake(fields).class).to eq Intake
+    expect(Intake.count).to eq 1
+  end
+end
